@@ -13,10 +13,25 @@ import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
 import { useLink } from 'solito/link'
 
+const BASE_URL = "https://pokeapi.co/api/v2/";
+const DITTO_ROUTE = "pokemon/ditto"
+
 export function HomeScreen() {
+  const [imgUrl, setImgUrl] = useState<string>('');
+  const [pokemonName, setPokemonName] = useState<string>('');
+
   const linkProps = useLink({
-    href: '/user/nate',
+    href: '/user/mike',
   })
+
+  const fetchPokemon = async () => {
+    const response = await fetch(`${BASE_URL}${DITTO_ROUTE}`);
+    const data = await response.json();
+    const { sprites, name } = data;
+    console.log(sprites?.front_default, name);
+    setImgUrl(sprites?.front_default);
+    setPokemonName(name);
+  }
 
   return (
     <YStack f={1} jc="center" ai="center" p="$4" space>
@@ -48,10 +63,15 @@ export function HomeScreen() {
       <XStack>
         <Button {...linkProps}>Link to user</Button>
       </XStack>
+      
+      {imgUrl && <img width={200} height={200} src={imgUrl} alt={pokemonName} />}
+      {pokemonName && <Paragraph ta="center">{pokemonName}</Paragraph>}
+      
+      <Button onPress={fetchPokemon} theme="pink" borderRadius="$11">Fetch a pokemon!</Button>
 
       <SheetDemo />
     </YStack>
-  )
+  );
 }
 
 function SheetDemo() {

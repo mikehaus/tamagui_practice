@@ -4117,7 +4117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tamagui/core@npm:1.35.12":
+"@tamagui/core@npm:1.35.12, @tamagui/core@npm:^1.35.12":
   version: 1.35.12
   resolution: "@tamagui/core@npm:1.35.12"
   dependencies:
@@ -14388,6 +14388,7 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.18.9
     "@manypkg/cli": ^0.19.1
+    "@tamagui/core": ^1.35.12
     check-dependency-version-consistency: ^3.0.3
     eslint: ^8.21.0
     node-gyp: ^9.3.1
