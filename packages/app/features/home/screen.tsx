@@ -9,6 +9,7 @@ import {
   XStack,
   YStack,
 } from '@my/ui'
+import { Text, Image } from "tamagui";
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
 import { useLink } from 'solito/link'
@@ -23,7 +24,7 @@ export function HomeScreen() {
   const linkProps = useLink({
     href: '/user/mike',
   })
-
+  
   const fetchPokemon = async () => {
     const response = await fetch(`${BASE_URL}${DITTO_ROUTE}`);
     const data = await response.json();
@@ -64,8 +65,8 @@ export function HomeScreen() {
         <Button {...linkProps}>Link to user</Button>
       </XStack>
       
-      {imgUrl && <img width={200} height={200} src={imgUrl} alt={pokemonName} />}
-      {pokemonName && <Paragraph ta="center">{pokemonName}</Paragraph>}
+      {imgUrl.length ? <Image source={{ uri: imgUrl, width: 100, height: 100 }} /> : null}
+      {pokemonName.length ? <Text ta="center">{pokemonName}</Text> : null}
       
       <Button onPress={fetchPokemon} theme="pink" borderRadius="$11">Fetch a pokemon!</Button>
 
